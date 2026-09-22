@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Estimate your daily calories, macros, water and step target from your body stats and daily activity.">
+  <title>Body Target Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Body Target Calculator</h1>
+    <p class="lede">Daily calories, macros, water and a step target based on your stats and how much you actually move.</p>
+  </header>
+
+  <main class="page">
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">Your information</h2>
+
+      <form id="calc-form" novalidate>
+        <div class="field-grid">
+          <div class="field">
+            <label for="weight">Weight (kg)</label>
+            <input id="weight" name="weight" type="number" inputmode="decimal"
+                   min="30" max="300" step="0.1" required
+                   aria-describedby="weight-error">
+            <p class="error" id="weight-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" inputmode="numeric"
+                   min="14" max="90" step="1" required
+                   aria-describedby="age-error">
+            <p class="error" id="age-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="sex">Sex</label>
+            <select id="sex" name="sex" required aria-describedby="sex-error">
+              <option value="" selected disabled>Select…</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <p class="error" id="sex-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="height">Height (cm)</label>
+            <input id="height" name="height" type="number" inputmode="decimal"
+                   min="120" max="230" step="0.5" required
+                   aria-describedby="height-error">
+            <p class="error" id="height-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="steps">Average daily steps</label>
+            <input id="steps" name="steps" type="number" inputmode="numeric"
+                   min="0" max="40000" step="1" required
+                   aria-describedby="steps-help steps-error">
+            <p class="help" id="steps-help">Use your normal average, not your maximum.</p>
+            <p class="error" id="steps-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="goal">Goal</label>
+            <select id="goal" name="goal" required aria-describedby="goal-error">
+              <option value="" selected disabled>Select…</option>
+              <option value="cut">Fat loss + muscle preservation</option>
+              <option value="maintain">Maintain</option>
+              <option value="gain">Lean muscle gain</option>
+            </select>
+            <p class="error" id="goal-error" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Calculate my targets</button>
+      </form>
+    </section>
+
+    <section id="results" class="results" aria-labelledby="results-title" tabindex="-1" hidden>
+      <h2 id="results-title">Your daily targets</h2>
+
+      <ul class="result-grid">
+        <li class="card result-card">
+          <h3 class="result-label">Calories</h3>
+          <p class="result-value"><span id="out-calories">–</span> <span class="unit">kcal</span></p>
+          <p class="help" id="out-calories-note"></p>
+        </li>
+        <li class="card result-card">
+          <h3 class="result-label">Protein</h3>
+          <p class="result-value"><span id="out-protein">–</span> <span class="unit">g</span></p>
+          <p class="help" id="out-protein-note"></p>
+        </li>
+        <li class="card result-card">
+          <h3 class="result-label">Carbs</h3>
+          <p class="result-value"><span id="out-carbs">–</span> <span class="unit">g</span></p>
+          <p class="help">Fills the remaining calories</p>
+        </li>
+        <li class="card result-card">
+          <h3 class="result-label">Fat</h3>
+          <p class="result-value"><span id="out-fat">–</span> <span class="unit">g</span></p>
+          <p class="help">25% of calories</p>
+        </li>
+        <li class="card result-card">
+          <h3 class="result-label">Water</h3>
+          <p class="result-value"><span id="out-water">–</span> <span class="unit">L</span></p>
+          <p class="help">Adjusted for your activity</p>
+        </li>
+        <li class="card result-card">
+          <h3 class="result-label">Step target</h3>
+          <p class="result-value"><span id="out-steps">–</span> <span class="unit">steps</span></p>
+          <p class="help" id="out-steps-note"></p>
+        </li>
+      </ul>
+
+      <p class="summary card" id="out-summary"></p>
+
+      <p class="disclaimer">Estimates only, based on population averages. Adjust after 2–3 weeks based on how your weight actually trends.</p>
+
+      <button type="button" id="recalc" class="btn btn-secondary">Recalculate</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
